@@ -6,7 +6,7 @@
 /*   By: skaynar <skaynar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/17 11:37:41 by skaynar           #+#    #+#             */
-/*   Updated: 2025/08/17 13:04:14 by skaynar          ###   ########.fr       */
+/*   Updated: 2025/08/19 15:42:16 by skaynar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@
 // 	return (current);
 // }
 
-t_map	*ft_mapnew(void *content)
+t_map	*ft_mapnew(void *content, int line_num)
 {
 	t_map	*new;
 
@@ -32,6 +32,7 @@ t_map	*ft_mapnew(void *content)
 	if (!new)
 		return (NULL);
 	new->map_line = content;
+    new->num = line_num;
 	new->next = NULL;
 	return (new);
 }

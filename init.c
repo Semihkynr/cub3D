@@ -6,7 +6,7 @@
 /*   By: skaynar <skaynar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/18 00:00:09 by skaynar           #+#    #+#             */
-/*   Updated: 2025/08/18 17:52:33 by skaynar          ###   ########.fr       */
+/*   Updated: 2025/08/19 15:47:06 by skaynar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ int is_map(char *line, t_data *data)
 		else
 			return(0);
 	}
-	map_add_back(&data->map, ft_mapnew(line));
+	map_add_back(&data->map, ft_mapnew(line, data->line_num));
 	return(1);
 }
 
@@ -98,6 +98,7 @@ int is_true_map(char *map, t_data *data)
     if(fd == -1)
 		return (close(fd), printf("Error\nCould not open map file\n"), 0);
 	line = get_next_line(fd);
+	data->line_num = 0;
 	while(line)
 	{
 		if(is_feature(line, data) || is_empty(line))
@@ -106,6 +107,7 @@ int is_true_map(char *map, t_data *data)
 			line = get_next_line(fd);
 		else
 			return(printf("Error\nFalse map\n"),0);
+		data->line_num++;
 	}
 	if(exe_feature(data->feature))
         return(printf("Error\nNo texture\n"),0);
