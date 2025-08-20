@@ -6,7 +6,7 @@
 /*   By: skaynar <skaynar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/16 11:56:14 by skaynar           #+#    #+#             */
-/*   Updated: 2025/08/19 15:42:35 by skaynar          ###   ########.fr       */
+/*   Updated: 2025/08/21 00:36:20 by skaynar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,12 +43,16 @@ typedef struct s_player
 	double sideDistY;
 	int hit;
 	int side;
+	int player_x;
+	int player_y;
 }	t_player;
 
 typedef struct s_map
 {
 	char *map_line;
 	int num;
+	int high;
+	int widht;
 	struct s_map *next;	
 }	t_map;
 
@@ -68,6 +72,7 @@ typedef struct s_data
     t_feature *feature;
 	t_player *player;
 	t_map *map;
+	char **charmap;
 	int line_num;
 	void	*mlx;
     void	*win;
@@ -80,6 +85,7 @@ int	check_map_name(char *str);
 int check_map(char **av, t_data *data);
 t_map	*ft_mapnew(void *content, int line_num);
 void    map_add_back(t_map **lst, t_map *new);
+int	ft_mapsize(t_map *lst);
 int is_exe(char *str);
 int	rgb_atoi(const char *str);
 int is_truedigit(char *str);

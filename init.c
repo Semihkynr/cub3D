@@ -6,7 +6,7 @@
 /*   By: skaynar <skaynar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/18 00:00:09 by skaynar           #+#    #+#             */
-/*   Updated: 2025/08/19 15:47:06 by skaynar          ###   ########.fr       */
+/*   Updated: 2025/08/21 00:34:54 by skaynar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,19 +60,29 @@ int	is_feature(char *line, t_data *data)
 }
 
 int is_map(char *line, t_data *data)
-{	
-	int i;
-
+{
+    int i ;
 	i = 0;
-	while(line[i])
-	{
-		if(line[i] == '1' || jumper(line[i]) || line[i] == '0' || line[i] == 'N')
-			i++;
-		else
-			return(0);
-	}
-	map_add_back(&data->map, ft_mapnew(line, data->line_num));
-	return(1);
+    while (line[i])
+    {
+        if (line[i] == '1' || line[i] == '0' || jumper(line[i]))
+        {
+            i++;
+            continue;
+        }
+        else if (line[i] == 'N' || line[i] == 'S' || line[i] == 'E' || line[i] == 'W')
+        {
+            if (!data->player->start_pos)
+                data->player->start_pos = line[i];
+            else
+                return (0);
+        }
+        else
+            return 0;
+        i++;
+    }
+    map_add_back(&data->map, ft_mapnew(line, data->line_num));
+    return 1;
 }
 
 int is_empty(char *line)
@@ -109,6 +119,8 @@ int is_true_map(char *map, t_data *data)
 			return(printf("Error\nFalse map\n"),0);
 		data->line_num++;
 	}
+	if(!data->player->start_pos)
+		return(printf("Error\nThere isn't Player\n"),0);
 	if(exe_feature(data->feature))
         return(printf("Error\nNo texture\n"),0);
     return(1);

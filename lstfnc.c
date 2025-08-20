@@ -6,7 +6,7 @@
 /*   By: skaynar <skaynar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/17 11:37:41 by skaynar           #+#    #+#             */
-/*   Updated: 2025/08/19 15:42:16 by skaynar          ###   ########.fr       */
+/*   Updated: 2025/08/20 23:28:20 by skaynar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,23 @@
 // 		current = current->next;
 // 	return (current);
 // }
+
+int	ft_mapsize(t_map *lst)
+{
+	int		i;
+	t_map	*current;
+
+	if (!lst)
+		return (0);
+	current = lst;
+	i = 0;
+	while (current)
+	{
+		current = current->next;
+		i++;
+	}
+	return (i);
+}
 
 t_map	*ft_mapnew(void *content, int line_num)
 {

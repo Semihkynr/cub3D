@@ -6,7 +6,7 @@
 /*   By: skaynar <skaynar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/16 11:55:12 by skaynar           #+#    #+#             */
-/*   Updated: 2025/08/18 16:00:26 by skaynar          ###   ########.fr       */
+/*   Updated: 2025/08/21 00:41:23 by skaynar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,5 @@ int main(int ac, char **av)
     data->player = malloc(sizeof(t_player));
     if (!check_map(av, data))
 		  return (0);
-    return(0);
-    
+    return(0);    
 }

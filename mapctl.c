@@ -6,11 +6,33 @@
 /*   By: skaynar <skaynar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/16 12:43:31 by skaynar           #+#    #+#             */
-/*   Updated: 2025/08/19 16:03:34 by skaynar          ###   ########.fr       */
+/*   Updated: 2025/08/21 00:39:43 by skaynar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+void list_to_char(t_data *data)
+{
+	t_map *fakemap;
+	int size;
+	char **map;
+	int i;
+	
+	i = 0;
+	fakemap = data->map;
+	size = ft_mapsize(data->map);
+	data->map->high = size;
+	map = malloc(sizeof(char *) * size);
+	while (fakemap)
+	{
+		map[i] = fakemap->map_line;
+		i++;
+		fakemap = fakemap->next;
+	}
+	map[i] = NULL;
+	data->charmap = map;
+}
 
 int itelim(t_data *data)
 {
@@ -32,6 +54,26 @@ int itelim(t_data *data)
 	return(0);
 }
 
+void find_player_position(char **map, t_data *data)
+{
+    int y = 0;
+    while (map[y])
+    {
+        int x = 0;
+        while (map[y][x])
+        {
+            if (map[y][x] == data->player->start_pos)
+            {
+                data->player->player_x = x;
+                data->player->player_y = y;
+                return;
+            }
+            x++;
+        }
+        y++;
+    }
+}
+
 int check_map(char **av, t_data *data)
 {
     if(!check_map_name(av[1]))
@@ -40,6 +82,9 @@ int check_map(char **av, t_data *data)
 			return(0);
 	if(itelim(data))
 		return(0);
+	list_to_char(data);
+	find_player_position(data->charmap, data);
+	
 	if(data->feature->we)
 		printf("%s",data->feature->we);
 	if(data->feature->so)
@@ -54,15 +99,15 @@ int check_map(char **av, t_data *data)
 		printf("%s",data->feature->c);
 	if(!data->map)
 		printf("data map yok\n");
-    while (data->map)
-    { 
-		if(data->map != NULL)
-        {
-			printf("%d-%s",  data->map->num, data->map->map_line);
-			data->map = data->map->next;
-		}
-		else
-			printf("NOMAP\n");
-	}
+    // while (data->map)
+    // { 
+	// 	if(data->map != NULL)
+    //     {
+	// 		printf("%d-%s",  data->map->num, data->map->map_line);
+	// 		data->map = data->map->next;
+	// 	}
+	// 	else
+	// 		printf("NOMAP\n");
+	// }
     return(1);
 }
