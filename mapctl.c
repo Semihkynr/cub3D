@@ -6,7 +6,7 @@
 /*   By: skaynar <skaynar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/16 12:43:31 by skaynar           #+#    #+#             */
-/*   Updated: 2025/08/21 00:39:43 by skaynar          ###   ########.fr       */
+/*   Updated: 2025/08/21 00:45:07 by skaynar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void list_to_char(t_data *data)
 	i = 0;
 	fakemap = data->map;
 	size = ft_mapsize(data->map);
-	data->map->high = size;
+	data->high = size;
 	map = malloc(sizeof(char *) * size);
 	while (fakemap)
 	{

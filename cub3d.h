@@ -6,7 +6,7 @@
 /*   By: skaynar <skaynar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/16 11:56:14 by skaynar           #+#    #+#             */
-/*   Updated: 2025/08/21 00:36:20 by skaynar          ###   ########.fr       */
+/*   Updated: 2025/08/21 00:44:55 by skaynar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,8 +51,6 @@ typedef struct s_map
 {
 	char *map_line;
 	int num;
-	int high;
-	int widht;
 	struct s_map *next;	
 }	t_map;
 
@@ -72,6 +70,8 @@ typedef struct s_data
     t_feature *feature;
 	t_player *player;
 	t_map *map;
+	int high;
+	int widht;
 	char **charmap;
 	int line_num;
 	void	*mlx;
