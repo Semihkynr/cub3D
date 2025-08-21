@@ -6,7 +6,7 @@
 /*   By: skaynar <skaynar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/16 12:43:31 by skaynar           #+#    #+#             */
-/*   Updated: 2025/08/21 19:00:49 by skaynar          ###   ########.fr       */
+/*   Updated: 2025/08/21 20:06:02 by skaynar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,11 @@ void list_to_char(t_data *data)
 	fakemap = data->map;
 	size = ft_mapsize(data->map);
 	data->high = size;
-	map = malloc(sizeof(char *) * size);
+	map = malloc(sizeof(char *) * (size + 1));
 	while (fakemap)
 	{
+		if((int)ft_strlen(fakemap->map_line) > data->widht)
+			data->widht = (int)ft_strlen(fakemap->map_line);
 		map[i] = ft_strdup(fakemap->map_line);
 		i++;
 		fakemap = fakemap->next;
@@ -52,26 +54,27 @@ int itelim(t_data *data)
 		else
 			return(printf("Error\nThere is empty line in map\n"), 1);	
 	}
+	data->widht = 0;
 	return(0);
 }
 
 void find_player_position(char **map, t_data *data)
 {
-    int y = 0;
-    while (map[y])
+    int x = 0;
+    while (map[x])
     {
-        int x = 0;
-        while (map[y][x])
+        int y = 0;
+        while (map[x][y])
         {
-            if (map[y][x] == data->player->start_pos)
+            if (map[x][y] == data->player->start_pos)
             {
                 data->player->player_x = x;
                 data->player->player_y = y;
                 return;
             }
-            x++;
+            y++;
         }
-        y++;
+        x++;
     }
 }
 int flood_fill(int x, int y, t_data *data)
@@ -116,7 +119,7 @@ int check_map(char **av, t_data *data)
 	list_to_char(data);
 	find_player_position(data->charmap, data);
 	data->fakemap = copy_char_matrix(data->charmap);
-	if (flood_fill(data->player->player_x, data->player->player_y, data))
+	if (flood_fill(data->player->player_y, data->player->player_x, data))
     	return (printf("Error\nInvalid map\n"), 0);
 	// int i = 0;
 	// while (data->fakemap[i])
