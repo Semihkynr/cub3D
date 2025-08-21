@@ -6,7 +6,7 @@
 /*   By: skaynar <skaynar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/16 11:56:14 by skaynar           #+#    #+#             */
-/*   Updated: 2025/08/21 00:44:55 by skaynar          ###   ########.fr       */
+/*   Updated: 2025/08/21 18:56:30 by skaynar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,7 @@ typedef struct s_data
 	int high;
 	int widht;
 	char **charmap;
+	char **fakemap;
 	int line_num;
 	void	*mlx;
     void	*win;
@@ -80,13 +81,17 @@ typedef struct s_data
 }	t_data;
 
 int is_true_map(char *map, t_data *data);
+void	clear_array(char **array);
+void	freegnl(int fd);
 int	jumper(char c);
 int	check_map_name(char *str);
 int check_map(char **av, t_data *data);
-t_map	*ft_mapnew(void *content, int line_num);
+t_map	*ft_mapnew(char *content, int line_num);
 void    map_add_back(t_map **lst, t_map *new);
 int	ft_mapsize(t_map *lst);
 int is_exe(char *str);
 int	rgb_atoi(const char *str);
 int is_truedigit(char *str);
+char **copy_char_matrix(char **src);
+void free_data(t_data *data);
 #endif

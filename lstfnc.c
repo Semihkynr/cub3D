@@ -6,7 +6,7 @@
 /*   By: skaynar <skaynar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/17 11:37:41 by skaynar           #+#    #+#             */
-/*   Updated: 2025/08/20 23:28:20 by skaynar          ###   ########.fr       */
+/*   Updated: 2025/08/21 18:08:58 by skaynar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,14 +41,14 @@ int	ft_mapsize(t_map *lst)
 	return (i);
 }
 
-t_map	*ft_mapnew(void *content, int line_num)
+t_map	*ft_mapnew(char *content, int line_num)
 {
 	t_map	*new;
 
 	new = (t_map *)malloc(sizeof(t_map));
 	if (!new)
 		return (NULL);
-	new->map_line = content;
+	new->map_line = ft_strdup(content);
     new->num = line_num;
 	new->next = NULL;
 	return (new);
