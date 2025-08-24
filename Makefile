@@ -1,10 +1,16 @@
 NAME = cub3D
 
-SRC = main.c mapctl.c get_next_line.c get_next_line_utils.c lstfnc.c utils.c init.c check.c
+MLX_DIR = minilibx-linux
+MLX_LIB = $(MLX_DIR)/libmlx.a
+MLX_FLAGS = -L$(MLX_DIR) -lmlx -lXext -lX11 -lm -lz
 
-OBJS = main.o mapctl.o get_next_line.o get_next_line_utils.o lstfnc.o utils.o init.o check.o
+SRC = main.c mapctl.c get_next_line.c get_next_line_utils.c lstfnc.c utils.c init.c check.c \
+		execute.c key_control.c raycasting.c dda.c texture_utils.c raycasting_utils.c move_player.c free.c feature.c 
 
-CFLAGS = -Wall -Wextra -Werror
+OBJS = main.o mapctl.o get_next_line.o get_next_line_utils.o lstfnc.o utils.o init.o check.o \
+		execute.o key_control.o raycasting.o dda.o texture_utils.o raycasting_utils.o move_player.o free.o feature.o
+
+CFLAGS = -Wall -Wextra -Werror -g
 
 CC = cc
 
@@ -14,18 +20,20 @@ all: $(NAME)
 
 $(NAME): $(OBJS)
 	make -C libft
-	$(CC) $(CFLAGS) $(OBJS) -o $(NAME) $(LIBFT)
-
+	make -C $(MLX_DIR)
+	$(CC) $(CFLAGS) $(OBJS) $(MLX_LIB) $(MLX_FLAGS) -o $(NAME) $(LIBFT)
 
 clean:
 	@rm -f $(OBJS)
 	make clean -C libft
+	make clean -C $(MLX_DIR)
 
 go: all clean
 
 fclean: clean
 	@rm -f $(NAME)
 	make fclean -C libft
+	make clean -C $(MLX_DIR)
 
 re: fclean all
 
