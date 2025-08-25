@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   texture_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: skaynar <skaynar@student.42.fr>            +#+  +:+       +#+        */
+/*   By: teraslan <teraslan@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/22 13:48:55 by teraslan          #+#    #+#             */
-/*   Updated: 2025/08/24 21:31:34 by skaynar          ###   ########.fr       */
+/*   Updated: 2025/08/25 16:53:24 by teraslan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	strip_trailing_whitespace(char *str)
+void	strip_whitespace(char *str)
 {
 	int	len;
 
@@ -26,14 +26,14 @@ void	strip_trailing_whitespace(char *str)
 
 char	*parse_texture_path(char *path, const char *prefix)
 {
-	if (path && (strncmp(path, prefix, 3) == 0 || strncmp(path, prefix,
+	if (path && (ft_strncmp(path, prefix, 3) == 0 || ft_strncmp(path, prefix,
 				3) == 0))
 		path += 3;
 	while (path && *path == ' ')
 		path++;
 	while (path && *path == ' ')
 		path++;
-	strip_trailing_whitespace(path);
+	strip_whitespace(path);
 	return (path);
 }
 

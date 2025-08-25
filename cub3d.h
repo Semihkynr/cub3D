@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: skaynar <skaynar@student.42.fr>            +#+  +:+       +#+        */
+/*   By: teraslan <teraslan@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/16 11:56:14 by skaynar           #+#    #+#             */
-/*   Updated: 2025/08/24 22:05:16 by skaynar          ###   ########.fr       */
+/*   Updated: 2025/08/25 16:54:32 by teraslan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@
 # include <fcntl.h>
 # include <stdbool.h>
 # include <stdio.h>
-# include <string.h>
 # include <sys/time.h>
 
 # define SCREENWIDTH 1920
@@ -149,9 +148,9 @@ typedef struct s_data
 	int				text_height;
 }					t_data;
 
-int	is_true_map(t_data *data, int fd);
+int					is_true_map(t_data *data, int fd);
 int					is_feature(char *line, t_data *data);
-int	feature_ctl(t_data *data);
+int					feature_ctl(t_data *data);
 void				clear_array(char **array);
 void				freegnl(int fd);
 int					jumper(char c);
@@ -166,7 +165,6 @@ int					is_truedigit(char *str, int val, int i, int count);
 char				**copy_char_matrix(char **src, int i);
 void				free_data(t_data *data, int i);
 void				execute(t_data *data);
-int					key_hook(int keycode, t_data *data);
 int					exit_program(t_data *data);
 void				list_to_char(t_data *data);
 void				find_player_position(char **map, t_data *data);
@@ -177,7 +175,7 @@ void				draw_wall_line(t_data *data, int *img_data, int line,
 						t_draw draw);
 t_texture			*choose_texture(t_data *data);
 void				player_position(t_player *player);
-void				strip_trailing_whitespace(char *str);
+void				strip_whitespace(char *str);
 char				*parse_texture_path(char *path, const char *prefix);
 void				ray_dist(t_player *player);
 void				side_ray(t_player *player);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   dda.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: skaynar <skaynar@student.42.fr>            +#+  +:+       +#+        */
+/*   By: teraslan <teraslan@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/22 13:47:43 by teraslan          #+#    #+#             */
-/*   Updated: 2025/08/24 21:27:40 by skaynar          ###   ########.fr       */
+/*   Updated: 2025/08/25 12:34:41 by teraslan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,11 +72,8 @@ double	find_wall_distance(t_player *player)
 
 void	dda_algorithm(t_data *data)
 {
-	int	limit;
-
 	data->player->hit = 0;
-	limit = 0;
-	while (data->player->hit == 0 && limit++ < 1000)
+	while (data->player->hit == 0)
 	{
 		if (data->player->side_dist_x < data->player->side_dist_y)
 		{

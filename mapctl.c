@@ -6,7 +6,7 @@
 /*   By: skaynar <skaynar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/16 12:43:31 by skaynar           #+#    #+#             */
-/*   Updated: 2025/08/24 22:04:58 by skaynar          ###   ########.fr       */
+/*   Updated: 2025/08/25 22:50:40 by skaynar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,8 +112,8 @@ int	flood_fill(int x, int y, t_data *data, char sp)
 
 int	check_map(char **av, t_data *data)
 {
-	int fd;
-	
+	int	fd;
+
 	if (!check_map_name(av[1]))
 		return (printf("Invalid map name\n"), 0);
 	data->line_num = 0;
