@@ -6,7 +6,7 @@
 /*   By: skaynar <skaynar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/17 23:58:38 by skaynar           #+#    #+#             */
-/*   Updated: 2025/08/25 23:46:12 by skaynar          ###   ########.fr       */
+/*   Updated: 2025/08/26 11:36:07 by skaynar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ int is_exe(char *str)
 	int		i;
 	int		start;
 	char	*path;
+	char 	*new;
 
 	i = 0;
 	while (str[i] && jumper(str[i]))
@@ -64,9 +65,10 @@ int is_exe(char *str)
 		while (str[i] && !jumper(str[i]))
 			i++;
 		path = ft_substr(str, start, i - start);
-		if (!path)
-			return (1);
-		free(path);
+		new = namectl(path);
+		start = open(new, O_RDONLY);
+		if (start < 0)
+			return (free(new), 1);
 	}
 	while (str[i] && jumper(str[i]))
 		i++;

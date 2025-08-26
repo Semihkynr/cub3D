@@ -6,7 +6,7 @@
 /*   By: skaynar <skaynar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/16 11:55:12 by skaynar           #+#    #+#             */
-/*   Updated: 2025/08/25 23:40:27 by skaynar          ###   ########.fr       */
+/*   Updated: 2025/08/26 12:52:56 by skaynar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,8 +70,7 @@ int	main(int ac, char **av)
 	set_player_position_from_map(data);
 	data->text_width = 0;
 	data->text_height = 0;
-	// execute(data);
-	printf("okey herşey\n");
+	execute(data);
 	free_data(data, 0);
 	return (0);
 }
