@@ -6,7 +6,7 @@
 /*   By: skaynar <skaynar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/16 12:43:31 by skaynar           #+#    #+#             */
-/*   Updated: 2025/08/25 22:50:40 by skaynar          ###   ########.fr       */
+/*   Updated: 2025/08/26 18:11:34 by skaynar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,13 +120,14 @@ int	check_map(char **av, t_data *data)
 	fd = open(av[1], O_RDONLY);
 	if (fd == -1)
 		return (close(fd), printf("Error\nCould not open map file\n"), 0);
-	if (!is_true_map(data, fd))
+	if (!is_true_map(data, fd, 0))
 		return (0);
 	if (itelim(data))
 		return (0);
 	list_to_char(data);
 	find_player_position(data->char_map, data);
 	data->fakemap = copy_char_matrix(data->char_map, 0);
+	
 	if (flood_fill(data->player->map_y, data->player->map_x, data,
 			data->player->start_pos))
 		return (printf("Error\nInvalid map\n"), 0);

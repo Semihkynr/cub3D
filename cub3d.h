@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: teraslan <teraslan@student.42istanbul.c    +#+  +:+       +#+        */
+/*   By: skaynar <skaynar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/16 11:56:14 by skaynar           #+#    #+#             */
-/*   Updated: 2025/08/25 16:54:32 by teraslan         ###   ########.fr       */
+/*   Updated: 2025/08/26 16:22:06 by skaynar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -148,8 +148,8 @@ typedef struct s_data
 	int				text_height;
 }					t_data;
 
-int					is_true_map(t_data *data, int fd);
-int					is_feature(char *line, t_data *data);
+int	is_true_map(t_data *data, int fd, int i);
+int	is_feature(char *line, t_data *data);
 int					feature_ctl(t_data *data);
 void				clear_array(char **array);
 void				freegnl(int fd);
