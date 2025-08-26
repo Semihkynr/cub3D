@@ -6,7 +6,7 @@
 /*   By: skaynar <skaynar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/16 12:43:31 by skaynar           #+#    #+#             */
-/*   Updated: 2025/08/26 18:11:34 by skaynar          ###   ########.fr       */
+/*   Updated: 2025/08/27 01:56:15 by skaynar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,32 +81,75 @@ void	find_player_position(char **map, t_data *data)
 	}
 }
 
-int	flood_fill(int x, int y, t_data *data, char sp)
-{
-	int		rowlen;
-	char	c;
 
-	if (x < 0 || y < 0 || data->fakemap[y] == NULL)
+int	ff_empty(char **a)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	while (a[i])
+	{
+		j = 0;
+		while (a[i][j])
+		{
+			if (a[i][j] == ' ')
+			{
+				if (i > 0 && a[i - 1][j] == '0')
+					return (1);
+				if (a[i + 1] && a[i + 1][j] == '0')
+					return (1);
+				if (j > 0 && a[i][j - 1] == '0')
+					return (1);
+				if (a[i][j + 1] && a[i][j + 1] == '0')
+					return (1);
+			}
+			j++;
+		}
+		i++;
+	}
+	return (0);
+}
+
+void ff_double(char **map, int x, int y, t_data *data)
+{
+	
+    if (x < 0 || x >= data->high || y < 0 || !map[x] || map[x][y] == '\0')
+		return;
+
+    if (map[x][y] != '0' && map[x][y] != '1' && map[x][y] != data->player->start_pos)
+        return;
+    
+    map[x][y] = '*';
+
+    ff_double(map, x + 1, y, data);
+    ff_double(map, x - 1, y, data);
+    ff_double(map, x, y + 1, data);
+    ff_double(map, x, y - 1, data);
+}
+
+
+
+int	check_map_zeros(char **map)
+{
+	int	i;
+	int	j;
+
+	if (!map)
 		return (1);
-	rowlen = (int)ft_strlen(data->fakemap[y]);
-	if (x >= rowlen)
-		return (1);
-	c = data->fakemap[y][x];
-	if (c == '\0' || c == '\n' || c == ' ')
-		return (1);
-	if (c == '1' || c == 'V')
-		return (0);
-	if (c != '0' && c != sp)
-		return (1);
-	data->fakemap[y][x] = 'V';
-	if (flood_fill(x + 1, y, data, sp))
-		return (1);
-	if (flood_fill(x - 1, y, data, sp))
-		return (1);
-	if (flood_fill(x, y + 1, data, sp))
-		return (1);
-	if (flood_fill(x, y - 1, data, sp))
-		return (1);
+
+	i = 0;
+	while (map[i])
+	{
+		j = 0;
+		while (map[i][j])
+		{
+			if (map[i][j] == '0' || map[i][j] == '1')
+				return (1);
+			j++;
+		}
+		i++;
+	}
 	return (0);
 }
 
@@ -127,9 +170,16 @@ int	check_map(char **av, t_data *data)
 	list_to_char(data);
 	find_player_position(data->char_map, data);
 	data->fakemap = copy_char_matrix(data->char_map, 0);
-	
-	if (flood_fill(data->player->map_y, data->player->map_x, data,
-			data->player->start_pos))
-		return (printf("Error\nInvalid map\n"), 0);
+	if(ff_empty(data->fakemap))
+		return(printf("ff_empty\n"),0);
+	ff_double(data->fakemap,data->player->map_x, data->player->map_y,data);
+	int i = -1;
+	while(data->fakemap[++i])
+		printf("%s",data->fakemap[i]);
+	if(check_map_zeros(data->fakemap))
+		return(printf("Double map\n"), 0);
+	// if (flood_fill(data->player->map_y, data->player->map_x, data,
+	// 		data->player->start_pos))
+	// 	return (printf("Error\nInvalid map\n"), 0);
 	return (1);
 }

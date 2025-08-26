@@ -6,7 +6,7 @@
 /*   By: skaynar <skaynar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/18 00:00:09 by skaynar           #+#    #+#             */
-/*   Updated: 2025/08/26 16:54:50 by skaynar          ###   ########.fr       */
+/*   Updated: 2025/08/27 01:04:02 by skaynar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,6 @@ int	is_empty(char *line)
 int	is_true_map(t_data *data, int fd, int i)
 {
 	char	*line;
-	// int a = 0;
 
 	line = get_next_line(fd);
 	while (line)
