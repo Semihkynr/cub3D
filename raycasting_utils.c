@@ -6,7 +6,7 @@
 /*   By: skaynar <skaynar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/22 17:38:44 by teraslan          #+#    #+#             */
-/*   Updated: 2025/08/24 21:28:20 by skaynar          ###   ########.fr       */
+/*   Updated: 2025/08/27 18:56:37 by skaynar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,27 +56,27 @@ void	side_ray(t_player *player)
 
 int	rgb_str_to_int(const char *str)
 {
-	int	r;
-	int	g;
-	int	b;
+	int		r;
+	int		g;
+	int		b;
+	char	**split;
 
 	r = 0;
 	g = 0;
 	b = 0;
-	while (*str && (*str < '0' || *str > '9'))
+	while (*str && jumper(*str))
 		str++;
-	r = ft_atoi(str);
-	while (*str && *str != ',')
+	if (*str == 'F' || *str == 'C')
 		str++;
-	if (*str == ',')
+	while (*str && jumper(*str))
 		str++;
-	g = ft_atoi(str);
-	while (*str && *str != ',')
-		str++;
-	if (*str == ',')
-		str++;
-	b = ft_atoi(str);
-	return ((r << 16) | (g << 8) | b);
+	split = ft_split(str, ',');
+	if (!split)
+		return (0);
+	r = rgb_atoi(split[0]);
+	g = rgb_atoi(split[1]);
+	b = rgb_atoi(split[2]);
+	return (clear_array(split), ((r << 16) | (g << 8) | b)) ;
 }
 
 void	ray_measure(int x, int w, t_data *data)

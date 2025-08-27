@@ -6,7 +6,7 @@
 /*   By: skaynar <skaynar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/17 23:58:38 by skaynar           #+#    #+#             */
-/*   Updated: 2025/08/24 21:44:01 by skaynar          ###   ########.fr       */
+/*   Updated: 2025/08/27 16:06:21 by skaynar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,11 +70,37 @@ int	is_exe(char *str)
 	return (close(i), clear_array(split), free(path), 0);
 }
 
+int	countsome(char *line)
+{
+	int	a;
+	int	b;
+
+	a = 0;
+	while (line[a])
+	{
+		if (line[a] == ',')
+		{
+			b = a - 1;
+			while (b >= 0 && line[b] == ' ')
+				b--;
+			if (b < 0 || !ft_isdigit(line[b]))
+				return (0);
+			b = a + 1;
+			while (line[b] == ' ')
+				b++;
+			if (!line[b] || !ft_isdigit(line[b]))
+				return (0);
+		}
+		a++;
+	}
+	return (1);
+}
+
 int	is_truedigit(char *line, int val, int i, int count)
 {
 	char	**split;
 
-	if (!line)
+	if (!line || !countsome(line))
 		return (0);
 	while (*line && jumper(*line))
 		line++;

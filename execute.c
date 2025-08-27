@@ -6,7 +6,7 @@
 /*   By: skaynar <skaynar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/22 13:47:21 by teraslan          #+#    #+#             */
-/*   Updated: 2025/08/24 21:27:48 by skaynar          ###   ########.fr       */
+/*   Updated: 2025/08/27 16:12:02 by skaynar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void	player_position(t_player *player)
 void	ready_mlx(t_data *data)
 {
 	data->mlx = mlx_init();
-	data->win = mlx_new_window(data->mlx, SCREENWIDTH, SCREENHEIGHT, "cub3d");
+	data->win = mlx_new_window(data->mlx, SCREENWIDTH, SCREENHEIGHT, "cub3D");
 	mlx_hook(data->win, 2, 1L << 0, key_press, data);
 	mlx_hook(data->win, 3, 1L << 1, key_release, data);
 	mlx_hook(data->win, 17, 0, exit_program, data);

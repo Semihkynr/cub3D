@@ -6,7 +6,7 @@
 /*   By: skaynar <skaynar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/18 00:00:09 by skaynar           #+#    #+#             */
-/*   Updated: 2025/08/27 01:04:02 by skaynar          ###   ########.fr       */
+/*   Updated: 2025/08/27 18:57:35 by skaynar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,19 +55,29 @@ int	is_empty(char *line)
 	return (1);
 }
 
-int	is_true_map(t_data *data, int fd, int i)
+int	check_tab(char *line)
+{
+	int	i;
+
+	i = 0;
+	while (line[i])
+	{
+		if (line[i] == '\t')
+			return (0);
+		i++;
+	}
+	return (1);
+}
+
+int	is_true_map(t_data *data, int fd)
 {
 	char	*line;
 
 	line = get_next_line(fd);
 	while (line)
 	{
-		i = -1;
-		while (line[++i])
-		{
-			if(line[i] == '\t')
-				return(0);
-		}
+		if (!check_tab(line))
+			return (free(line), freegnl(fd), 0);
 		if (is_feature(line, data) || is_empty(line))
 		{
 			free(line);
@@ -76,14 +86,12 @@ int	is_true_map(t_data *data, int fd, int i)
 		else if (is_map(line, data, 0))
 		{
 			free(line);
-			line = get_next_line(fd);			
+			line = get_next_line(fd);
 		}
 		else
 			return (freegnl(fd), close(fd), free(line),
 				printf("Error\nFalse map\n"), 0);
 		data->line_num++;
 	}
-	if (!feature_ctl(data))
-		return (close(fd), 0);
 	return (close(fd), 1);
 }
