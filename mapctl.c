@@ -6,7 +6,7 @@
 /*   By: skaynar <skaynar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/16 12:43:31 by skaynar           #+#    #+#             */
-/*   Updated: 2025/08/27 01:56:15 by skaynar          ###   ########.fr       */
+/*   Updated: 2025/08/27 13:47:40 by skaynar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,27 +82,33 @@ void	find_player_position(char **map, t_data *data)
 }
 
 
-int	ff_empty(char **a)
+int	ff_empty(char **a, char c)
 {
 	int	i;
 	int	j;
 
+
 	i = 0;
 	while (a[i])
 	{
+		printf("%s",a[i]);
 		j = 0;
 		while (a[i][j])
 		{
-			if (a[i][j] == ' ')
+			if (a[i][j] == '0')
 			{
-				if (i > 0 && a[i - 1][j] == '0')
+				if(i == 0)
+					return(1);
+				if (i > 0 && a[i - 1][j] && a[i - 1][j] != '1' && a[i - 1][j] != '0' && a[i - 1][j] != c)
 					return (1);
-				if (a[i + 1] && a[i + 1][j] == '0')
+				if (a[i + 1] && a[i + 1][j] != '1' && a[i + 1][j] != '0' && a[i + 1][j] != c)
 					return (1);
-				if (j > 0 && a[i][j - 1] == '0')
+				if (j > 0 && a[i][j - 1] && a[i][j - 1] != '1' && a[i][j - 1] != '0' && a[i][j - 1] != c)
 					return (1);
-				if (a[i][j + 1] && a[i][j + 1] == '0')
+				if (a[i][j + 1] && a[i][j + 1]  && a[i][j + 1] != '1' && a[i][j + 1] != '0' && a[i][j + 1] != c)
 					return (1);
+				if(!a[i+1] || !a[i-1] || !a[i][j+1] || !a[i][j -1 ])
+					return(1);
 			}
 			j++;
 		}
@@ -170,7 +176,7 @@ int	check_map(char **av, t_data *data)
 	list_to_char(data);
 	find_player_position(data->char_map, data);
 	data->fakemap = copy_char_matrix(data->char_map, 0);
-	if(ff_empty(data->fakemap))
+	if(ff_empty(data->fakemap, data->player->start_pos))
 		return(printf("ff_empty\n"),0);
 	ff_double(data->fakemap,data->player->map_x, data->player->map_y,data);
 	int i = -1;
